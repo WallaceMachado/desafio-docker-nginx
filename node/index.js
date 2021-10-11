@@ -34,6 +34,3 @@ app.listen(port, () => {
   console.log('Up on:', port);
 })
 
-app.listen(port, ()=> {
-    console.log('Rodando na porta ' + port)
-})
