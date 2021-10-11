@@ -1,6 +1,6 @@
 version: '3.7'
 
-services: 
+services:
   nginx:
     build:
       context: ./nginx
@@ -12,19 +12,18 @@ services:
       - app
     networks:
       - default-network
+  
   app:
-    build: 
+    build:
       context: ./node
-    container_name: app
-    networks: 
-      - default-network
-    volumes: 
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
       - ./node:/usr/src/app
+      - /usr/src/app/node_modules
     tty: true
-    ports: 
-      - "3000:3000"
     depends_on: 
-       - db
+      - db 
 
   db:
     build: 
@@ -39,9 +38,8 @@ services:
     environment:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
+      
 
-    
-
-networks: 
+networks:
   default-network:
-    driver: bridge      
+    driver: bridge
